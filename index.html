@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CrossDomain JS - Test Page</title>
+    <script language="javascript" src="public/crossdomain-ajax.js"></script>
+    <script language="javascript" type="text/javascript">
+      var jquery_path = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js";
+
+      crossdomain.async_load_javascript(jquery_path, function () {
+        $(function () {
+          crossdomain.ajax({
+              type: "GET",
+              url: "http://thebuzzengine.appspot.com/api/hello/",
+              success: function (txt) {
+                $('#responseget').html(txt);
+              },
+          });
+
+          crossdomain.ajax({
+            type: "POST",
+            url: "http://thebuzzengine.appspot.com/api/hello/",
+            data: "hello=world",
+            success: function (txt) {
+              $('#responsepost').html(txt);
+            },
+          });
+        });
+      });
+    </script>
+    <style type="text/css" media="screen">
+      #responseget, #responsepost {
+          background-color: black;
+          color: white;
+          padding: 10px;
+          min-width: 100px;
+          display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Making cross-domain GET request:
+      <pre id="responseget">&nbsp;</pre>
+    </p>
+    <p>
+      Making cross-domain POST request:
+      <pre id="responsepost">&nbsp;</pre>
+    </p>
+  </body>
+</html>
