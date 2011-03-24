@@ -165,15 +165,10 @@ var crossdomain = (function () {
 	else
 	    xhr = null;
 
-	if (!xhr) {
-	    if (typeof flensed == 'undefined') {
-		async_load_javascript(CROSSDOMAINJS_PATH + "flXHR/flXHR.js", function () {
-		    _ajax_with_flxhr(options);
-		});
-	    }
-	    else {
+	if (!xhr || true) {
+	    async_load_javascript(CROSSDOMAINJS_PATH + "flXHR/flXHR.js", function () {
 		_ajax_with_flxhr(options);
-	    }
+	    });
 	}
 	else {
 	    var handle_load = function (event_type) {
