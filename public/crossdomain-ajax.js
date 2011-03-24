@@ -42,6 +42,7 @@ var crossdomain = (function () {
 
     // used by async_load_javascript
     var FILES_INCLUDED = {};
+    var FILES_LOADING  = {}; // for avoiding race conditions
     var REGISTERED_CALLBACKS = {};
 
     //
@@ -77,8 +78,14 @@ var crossdomain = (function () {
     function async_load_javascript(file, callback) {
 	register_callback(file, callback);
 
-	if (FILES_INCLUDED[file])
-	    return execute_callbacks(file);
+	if (FILES_INCLUDED[file]) {
+	    execute_callbacks(file);
+	    return true;
+	}
+	if (FILES_LOADING[file]) 
+	    return false;
+
+	FILES_LOADING[file] = true;
 
 	var html_doc = document.getElementsByTagName('head')[0];
 	js = document.createElement('script');
@@ -102,7 +109,7 @@ var crossdomain = (function () {
 	    }
 	};
 
-	return false;	
+	return false;
     }
 
     //
@@ -165,7 +172,7 @@ var crossdomain = (function () {
 	else
 	    xhr = null;
 
-	if (!xhr || true) {
+	if (!xhr) {
 	    async_load_javascript(CROSSDOMAINJS_PATH + "flXHR/flXHR.js", function () {
 		_ajax_with_flxhr(options);
 	    });
