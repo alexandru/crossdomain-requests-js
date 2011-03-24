@@ -1,5 +1,8 @@
-Small Script for doing Cross-Domain, Cross-Browser Ajax Requests
-================================================================
+About
+=====
+
+A small/light script for doing cross-domain, cross-browser ajax
+requests.
 
 It provides 2 utility methods:
 
@@ -18,6 +21,12 @@ async_load_javascript() is used internally for asynchronously loading
 flXHR, only in case it is needed. It loads a Javascript file, and when
 done it executes the provided callback. Multiple callbacks provided
 (by multiple calls done at the same time) are stacked.
+
+Compatibility
+-------------
+
+Currently is known to work on: Opera 11 (flXHR), IExplorer 6 (flXHR),
+IExplorer 8 (CORS), Firefox 3.5/4 (CORS), Chrome 10 (CORS).
 
 Usage Sample
 ------------
