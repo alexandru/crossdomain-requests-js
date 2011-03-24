@@ -8,7 +8,7 @@ It provides 2 utility methods:
 
 ajax() does cross-domain requests. If it cannot use HTTP Access
 Control (CORS) available in modern browsers, then it falls back to
-[http://flxhr.flensed.com/](flensed.flXHR), a Flash-based plugin which
+[flensed.flXHR](http://flxhr.flensed.com/), a Flash-based plugin which
 provides an alternative implementation for XmlHttpRequest.
 
 But flXHR is heavy and doesn't work on mobile-phones well, so if the
