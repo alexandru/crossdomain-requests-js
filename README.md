@@ -22,6 +22,12 @@ flXHR, only in case it is needed. It loads a Javascript file, and when
 done it executes the provided callback. Multiple callbacks provided
 (by multiple calls done at the same time) are stacked.
 
+Technical details
+-----------------
+
+This code was actually wrote as a companion to a blog post:
+    http://alexn.org/blog/2011/03/24/cross-domain-requests.html
+
 Compatibility
 -------------
 
