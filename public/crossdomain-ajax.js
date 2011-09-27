@@ -156,6 +156,7 @@ var crossdomain = (function () {
 	var success = options['success'];
 	var error = options['error'];
 	var data  = options['data'];
+	var withCredentials = options['withCredentials'] || false;
 
 	try {
 	    var xhr = new XMLHttpRequest();
@@ -191,7 +192,8 @@ var crossdomain = (function () {
 	    };
 
 	    try {
-		xhr.withCredentials = true;
+		if (withCredentials)
+		    xhr.withCredentials = true;
 	    } catch(e) {};
 
 	    xhr.onload  = function (e) { handle_load('load')(is_iexplorer() ? e : e.target) };
