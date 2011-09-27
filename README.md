@@ -26,7 +26,13 @@ Technical details
 -----------------
 
 This code was actually wrote as a companion to a blog post:
-    http://alexn.org/blog/2011/03/24/cross-domain-requests.html
+
+- http://alexn.org/blog/2011/03/24/cross-domain-requests.html
+- [sample usage](http://alexn.org/crossdomain-requests-js/)
+
+Btw, if the above sample doesn't work for you (i.e. it doesn't display
+messages in the black boxes), then please submit a bug report (with
+the browser+version and OS specified). Thanks.
 
 Compatibility
 -------------
