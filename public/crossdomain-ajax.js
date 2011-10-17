@@ -122,6 +122,7 @@ var crossdomain = (function () {
 	var success = options['success'];
 	var error   = options['error'];
 	var data    = options['data'];
+	var headers = options['headers'] || {};
 
 	function handle_load(XHRobj) {
 	    if (XHRobj.readyState == 4) {
@@ -141,6 +142,12 @@ var crossdomain = (function () {
 	});
 
 	flproxy.open(type, url, true);
+	for(var key in headers){
+        if(headers.hasOwnProperty(key)){
+            flproxy.setRequestHeader(key, headers[key]);
+        }
+    }
+
 	flproxy.send(data);
     }
 
@@ -156,6 +163,7 @@ var crossdomain = (function () {
 	var success = options['success'];
 	var error = options['error'];
 	var data  = options['data'];
+	var headers = options['headers'] || {};
 	var withCredentials = options['withCredentials'] || false;
 
 	try {
@@ -195,6 +203,12 @@ var crossdomain = (function () {
 		if (withCredentials)
 		    xhr.withCredentials = true;
 	    } catch(e) {};
+
+        for(var key in headers){
+            if(headers.hasOwnProperty(key)){
+                xhr.setRequestHeader(key, headers[key]);
+            }
+        }
 
 	    xhr.onload  = function (e) { handle_load('load')(is_iexplorer() ? e : e.target) };
 	    xhr.onerror = function (e) { handle_load('error')(is_iexplorer() ? e : e.target) };
