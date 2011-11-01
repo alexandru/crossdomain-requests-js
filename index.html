@@ -6,45 +6,102 @@
     <script language="javascript" type="text/javascript">
       var jquery_path = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js";
 
+      // stupid workaround, as IExplorer is sometimes configured to not send the HTTP_REFERER
+      var origin = (window.location + '').match(/(https?:\/\/[^\/]+)/)[1];
+
       crossdomain.async_load_javascript(jquery_path, function () {
         $(function () {
           crossdomain.ajax({
               type: "GET",
-              url: "http://thebuzzengine.appspot.com/api/hello/",
+              url: "http://thebuzzengine.appspot.com/api/hello/?origin=" + escape(origin),
               success: function (txt) {
                 $('#responseget').html(txt);
-              },
+              }
           });
 
           crossdomain.ajax({
             type: "POST",
             url: "http://thebuzzengine.appspot.com/api/hello/",
-            data: "hello=world",
+            data: "origin=" + escape(origin),
             success: function (txt) {
               $('#responsepost').html(txt);
-            },
+            }
           });
         });
       });
     </script>
     <style type="text/css" media="screen">
+      body {
+	  width: 720px;
+	  margin: auto;
+	  color: #555;
+	  font-family: verdana, sans-serif;
+      }
+      h1 {
+	  font-size: 25px;
+	  color: #555;
+	  margin-bottom: 30px;
+      }
       #responseget, #responsepost {
           background-color: black;
           color: white;
           padding: 10px;
           min-width: 100px;
           display: block;
+	  margin: 0;
+	  margin-top: 5px;
+      }
+      .help {
+	  display: block;
+	  font-size: 12px;
+	  font-style: italic;
+      }
+      div.row {
+	  margin-bottom: 20px;
+      }
+      span.desc {
+	  font-weight: bold;
+	  color: #440000;
+      }
+      a {
+	  color: #4455aa;
+	  text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      div.description {
+	  margin-bottom: 20px;
       }
     </style>
   </head>
   <body>
-    <p>
-      Making cross-domain GET request:
+    <h1>Cross-Browser, Cross-Domain Ajax Requests</h1>
+
+    <div class="description">
+      Small utility for making cross-browser, cross-domain Ajax
+      request. See the following resources:
+
+      <ul>
+	<li><a href="https://github.com/alexandru/crossdomain-requests-js/">Source code</a></li>
+	<li><a href="http://alexn.org/blog/2011/03/24/cross-domain-requests.html">Technical Description (tutorial)</a></li>
+	<li><a href="https://github.com/alexandru/crossdomain-requests-js/wiki/Compatibility">Compatibility</a></li>
+	<li><a href="https://github.com/alexandru/crossdomain-requests-js/wiki/Usage">Usage</a></li>
+	<li><a href="https://github.com/alexandru/crossdomain-requests-js/wiki/Troubleshooting">Troubleshooting</a></li>
+	<li><a href="http://alexn.org">Author's Blog</a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <span class="desc">Testing cross-domain GET request ...</span>
       <pre id="responseget">&nbsp;</pre>
-    </p>
-    <p>
-      Making cross-domain POST request:
+      <span class="help">You should see a greeting from TheBuzzEngine</span>
+    </div>
+
+    <div class="row">
+      <span class="desc">Testing cross-domain POST request ...</span>
       <pre id="responsepost">&nbsp;</pre>
-    </p>
+      <span class="help">You should see a greeting from TheBuzzEngine</span>
+    </div>
+
+    <a href="http://github.com/alexandru"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://alexn.org/public/images/fork.png" alt="Fork me on GitHub" /></a>
   </body>
 </html>

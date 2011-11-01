@@ -150,6 +150,18 @@ var crossdomain = (function () {
     // For browsers that do not support CORS, it fallbacks to a flXHR
     // request.
     //
+    // Arguments:
+    //
+    //    url: the request's URL
+    //    type: HTTP verb, as in "GET", "POST", "PUT", "DELETE"
+    //    success: JS callback to be executed on success
+    //    error: JS callback to be executed on error
+    //	  data: data to send in case of POST (it's a string, this
+    //	         method does not do form-encoding)
+    //  
+    // NOTE: withCredentials does not work in IExplorer or with flXHR
+    //       I would advise against using it.
+    //
     function ajax(options) {
 	var url = options['url'];
 	var type = options['type'] || 'GET';
@@ -191,7 +203,10 @@ var crossdomain = (function () {
 	    };
 
 	    try {
-		xhr.withCredentials = true;
+		// withCredentials is not supported by IExplorer's
+		// XDomainRequest, neither it is supported by flXHR
+		// and it has weird behavior anyway
+		xhr.withCredentials = false;
 	    } catch(e) {};
 
 	    xhr.onload  = function (e) { handle_load('load')(is_iexplorer() ? e : e.target) };
