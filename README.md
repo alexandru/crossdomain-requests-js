@@ -31,7 +31,7 @@ See:
 - [Compatibility](https://github.com/alexandru/crossdomain-requests-js/wiki/Compatibility)
 - [Usage](https://github.com/alexandru/crossdomain-requests-js/wiki/Usage)
 - [Troubleshooting](https://github.com/alexandru/crossdomain-requests-js/wiki/Troubleshooting)
-- [Implementation / technical details](http://alexn.org/blog/2011/03/24/cross-domain-requests.html)
+- [Implementation / technical details](http://bionicspirit.com/blog/2011/03/24/cross-domain-requests.html)
 
 If it doesn't work for you, please open a bug-ticket (with details)
 and I'll love to fix it for you.
